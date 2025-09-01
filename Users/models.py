@@ -17,3 +17,7 @@ class CustomUser(models.Model):
     birthday_date = jmodels.jDateField(name="birthday_date")
     ceremony_datetime = jmodels.jDateTimeField(name="ceremony_datetime")
     country = models.CharField(default="Iran", name="country")
+
+    def get_first_and_last_name(self):
+        first_name, last_name = self.full_name.split(" ")
+        return {"first_name": first_name, "last_name": last_name}
