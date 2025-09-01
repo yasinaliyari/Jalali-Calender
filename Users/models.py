@@ -1,3 +1,4 @@
+import jdatetime
 from django.db import models
 from django_jalali.db import models as jmodels
 
@@ -21,3 +22,15 @@ class CustomUser(models.Model):
     def get_first_and_last_name(self):
         first_name, last_name = self.full_name.split(" ")
         return {"first_name": first_name, "last_name": last_name}
+
+    def get_age(self):
+        today = jdatetime.date.today()
+        years = today.year - self.birthday_date.year
+
+        if (today.month, today.day) < (
+            self.birthday_date.month,
+            self.birthday_date.day,
+        ):
+            years -= 1
+
+        return years
