@@ -34,3 +34,12 @@ class CustomUser(models.Model):
             years -= 1
 
         return years
+
+    def is_birthday(self):
+        today = jdatetime.date.today()
+        if (self.birthday_date.month, self.birthday_date.day) == (
+            today.month,
+            today.day,
+        ):
+            return True
+        return False
