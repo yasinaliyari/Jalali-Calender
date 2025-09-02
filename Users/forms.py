@@ -33,7 +33,7 @@ class CustomUserForm(forms.ModelForm):
                 "Enter your first and last name with a space between them."
             )
         first, last = parts
-        if not first.istitle() and last.istitle():
+        if not first.istitle() or not last.istitle():
             raise ValidationError(
                 "First and last names must start with a capital letter."
             )

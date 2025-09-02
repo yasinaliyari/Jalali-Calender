@@ -22,4 +22,4 @@ class BirthdayCreateView(View):
             CustomUser.objects.create(**form.cleaned_data)
             return redirect("home")
         else:
-            return redirect("add_birthday")
+            return render(request, "add_birthday.html", {"form": form})
