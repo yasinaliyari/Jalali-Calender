@@ -23,3 +23,18 @@ class CustomUserForm(forms.ModelForm):
                 "The national code must be 10 digits and only contain numbers."
             )
         return code
+
+    def clean_full_name(self):
+        name = self.cleaned_data.get("full_name")
+        parts = name.split(" ")
+
+        if len(parts) != 2:
+            raise ValidationError(
+                "Enter your first and last name with a space between them."
+            )
+        first, last = parts
+        if not first.istitle() and last.istitle():
+            raise ValidationError(
+                "First and last names must start with a capital letter."
+            )
+        return name
